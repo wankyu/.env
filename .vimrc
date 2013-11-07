@@ -34,6 +34,20 @@ if has("win32") && has("gui_running") " gvim
     endfunction
 endif
 
+" ------------------------------------
+"set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+filetype plugin indent on
+
+" ------------------------------------
+
 if has("win32") && has("gui_running")
     set enc=korea
 else
@@ -154,6 +168,7 @@ map \w :set wrap!<cr>
 map \l :set list!<cr>
 map \p :call TogglePaste()<CR>
 map \s :call ToggleSpell()<CR>
+map \t :call ToggleTab()<CR>
 
 " 가운데 마우스 버튼으로 붙여넣기 하는 것을 무효화한다.
 map <MiddleMouse> <Nop>
@@ -171,6 +186,10 @@ fu! TogglePaste()
 endf
 fu! ToggleSpell()
     let &l:spell = 1 - &l:spell
+endf
+fu! ToggleTab()
+    set et!
+    let &tw = &tw == 0 ? 80 : 0
 endf
 
 " 상용구 설정
@@ -274,3 +293,32 @@ let g:explSplitRight=1
 let g:explStartRight=1
 let g:explWinSize=20
 
+" http://stackoverflow.com/questions/4792561/how-to-do-search-replace-with-ack-
+" Define a command to make it easier to use
+command! -nargs=+ QFDo call QFDo(<q-args>)
+
+" Function that does the work
+function! QFDo(command)
+    " Create a dictionary so that we can
+    " get the list of buffers rather than the
+    " list of lines in buffers (easy way
+    " to get unique entries)
+    let buffer_numbers = {}
+    " For each entry, use the buffer number as 
+    " a dictionary key (won't get repeats)
+    for fixlist_entry in getqflist()
+        let buffer_numbers[fixlist_entry['bufnr']] = 1
+    endfor
+    " Make it into a list as it seems cleaner
+    let buffer_number_list = keys(buffer_numbers)
+
+    " For each buffer
+    for num in buffer_number_list
+        " Select the buffer
+        exe 'buffer' num
+        " Run the command that's passed as an argument
+        exe a:command
+        " Save if necessary
+        update
+    endfor
+endfunction
