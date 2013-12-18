@@ -38,11 +38,20 @@ endif
 "set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
+
+" My bundles here:
+" extended % matching for HTML, LaTeX, and many other languages
+Bundle 'matchit.zip'
+" Functions and mappings to close open HTML/XML tags (with C-_)
+Bundle 'closetag.vim'
+" plug-in which provides support for expanding abbreviations similar to emmet
+Bundle 'https://github.com/vim-scripts/Emmet.vim.git'
+Bundle 'https://github.com/vim-scripts/Colour-Sampler-Pack.git'
 
 filetype plugin indent on
 
@@ -155,11 +164,6 @@ set lz          " |lazyredraw| Don't redraw while executing macros
 set nospell spelllang=en " Spell Checking 기능 (영어)
 
 let html_use_css = 1            " the ':%TOhtml' command generates html without <font> tags
-
-"Close Tag
-:let b:closetag_html_style=1
-:source ~/.vim/scripts/closetag.vim
-:au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
 
 map <F8> zo
 map <F9> zf
