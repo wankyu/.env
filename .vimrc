@@ -53,6 +53,9 @@ Bundle 'closetag.vim'
 Bundle 'https://github.com/vim-scripts/Emmet.vim.git'
 Bundle 'https://github.com/vim-scripts/Colour-Sampler-Pack.git'
 
+Bundle 'https://github.com/digitaltoad/vim-jade'
+Bundle 'https://github.com/cakebaker/scss-syntax.vim'
+
 filetype plugin indent on
 
 " ------------------------------------
@@ -196,12 +199,21 @@ fu! ToggleTab()
     let &tw = &tw == 0 ? 80 : 0
 endf
 
+" Explorer Setting
+let g:netrw_preview = 1 " preview window shown in a vertically split window
+let g:netrw_browse_split = 0 " re-using the same window
+"let g:explVertical=1
+"let g:explSplitRight=1
+"let g:explStartRight=1
+"let g:explWinSize=20
+
 " 상용구 설정
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 iab xtime <C-R>=strftime("%H:%M:%S")<CR>
 iab #d <div class=""></div>
 iab #i <img src="../img/" width="" height="" title="" alt="">
 
+"au BufReadPost *.scss set syntax=css
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 홈 디렉토리가 존재할 때에만 사용할 수 있는 기능들
@@ -290,12 +302,6 @@ au FileType javascript,jsp setl cin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 편리한 기능
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 파일 탐색기 설정
-let g:explVertical=1
-let g:explSplitRight=1
-let g:explStartRight=1
-let g:explWinSize=20
 
 " http://stackoverflow.com/questions/4792561/how-to-do-search-replace-with-ack-
 " Define a command to make it easier to use
