@@ -56,6 +56,8 @@ Bundle 'https://github.com/vim-scripts/Colour-Sampler-Pack.git'
 Bundle 'https://github.com/digitaltoad/vim-jade'
 Bundle 'https://github.com/cakebaker/scss-syntax.vim'
 
+Bundle 'tpope/vim-fugitive'
+
 filetype plugin indent on
 
 " ------------------------------------
@@ -165,11 +167,21 @@ set wmnu        " |wildmenu| Use menu for command line completion
 set lz          " |lazyredraw| Don't redraw while executing macros
 
 set nospell spelllang=en " Spell Checking 기능 (영어)
+"set report=0   " |report| Threshold for reporting number of lines changed.
+"set km=startsel,stopsel
 
-let html_use_css = 1            " the ':%TOhtml' command generates html without <font> tags
+set cursorline
+hi CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+set cursorcolumn
+hi CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE
+hi Search cterm=NONE ctermfg=NONE ctermbg=240
 
-map <F8> zo
-map <F9> zf
+autocmd BufRead,BufNewFile ~/www/work/m-search/* setlocal noet
+autocmd BufRead,BufNewFile ~/www/work/tvcast/* setlocal noet
+"au BufRead,BufNewFile *.dic setl ft=php
+au FileType javascript,jsp setl cin
+"au BufReadPost *.scss set syntax=css
+
 map \n :set nu!<CR>
 map \w :set wrap!<cr>
 map \l :set list!<cr>
@@ -177,7 +189,6 @@ map \p :call TogglePaste()<CR>
 map \s :call ToggleSpell()<CR>
 map \t :call ToggleTab()<CR>
 
-" 가운데 마우스 버튼으로 붙여넣기 하는 것을 무효화한다.
 map <MiddleMouse> <Nop>
 map! <MiddleMouse> <Nop>
 
@@ -199,6 +210,12 @@ fu! ToggleTab()
     let &tw = &tw == 0 ? 80 : 0
 endf
 
+" 상용구 설정
+iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+iab xtime <C-R>=strftime("%H:%M:%S")<CR>
+iab #d <div class=""></div>
+iab #i <img src="../img/" width="" height="" title="" alt="">
+
 " Explorer Setting
 let g:netrw_preview = 1 " preview window shown in a vertically split window
 let g:netrw_browse_split = 0 " re-using the same window
@@ -207,13 +224,8 @@ let g:netrw_browse_split = 0 " re-using the same window
 "let g:explStartRight=1
 "let g:explWinSize=20
 
-" 상용구 설정
-iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-iab xtime <C-R>=strftime("%H:%M:%S")<CR>
-iab #d <div class=""></div>
-iab #i <img src="../img/" width="" height="" title="" alt="">
+let html_use_css = 1            " the ':%TOhtml' command generates html without <font> tags
 
-"au BufReadPost *.scss set syntax=css
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 홈 디렉토리가 존재할 때에만 사용할 수 있는 기능들
@@ -259,28 +271,11 @@ endif
 " 편집 기능 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 마지막 편집 위치 복원 기능
-au BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\   exe "norm g`\"" |
-\ endif
-
 " gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
 " xterm_clipboard 기능이 있을 때에도 매핑 가능
 if has("gui_running") || has("xterm_clipboard")
 	set cb=unnamed
 endif
-
-" SHIFT 키로 선택 영역을 만드는 것을 허용
-" 영역 상태에서 Ctrl+F,B 로 이동하면 영역이 해제되어 버려서 해제
-"set km=startsel,stopsel
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 모양 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 추적 수준을 최대로
-"set report=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " filetype 기능 & Syntax Highlighting 기능
@@ -288,16 +283,6 @@ endif
 
 " 파일의 종류를 자동으로 인식
 filet plugin indent on
-
-" 몇몇 커스텀 확장자들에게 파일 형식 설정
-"au BufRead,BufNewFile *.dic setl ft=php
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" indent 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 내장된 indent 파일이 없어서 C indent 를 사용하는 경우
-au FileType javascript,jsp setl cin
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 편리한 기능
