@@ -1,3 +1,30 @@
-[submodule ".vim/bundle/vundle"]
-	path = .vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
+[submodule ".vim/pack/colour-sampler-pack"]
+	path = .vim/pack/plugins/start/colour-sampler-pack
+	url = https://github.com/vim-scripts/Colour-Sampler-Pack.git
+[submodule ".vim/pack/vim-fugitive"]
+	path = .vim/pack/plugins/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule ".vim/pack/plugins/start/vim-pug"]
+	path = .vim/pack/plugins/start/vim-pug
+	url = git://github.com/digitaltoad/vim-pug.git
+[submodule ".vim/pack/plugins/start/vim-surround"]
+	path = .vim/pack/plugins/start/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule ".vim/pack/plugins/start/vim-ragtag"]
+	path = .vim/pack/plugins/start/vim-ragtag
+	url = https://github.com/tpope/vim-ragtag
+[submodule ".vim/pack/plugins/start/auto-pairs"]
+	path = .vim/pack/plugins/start/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule ".vim/pack/plugins/start/vim-repeat"]
+	path = .vim/pack/plugins/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule ".vim/pack/plugins/start/vim-commentary"]
+	path = .vim/pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule ".vim/pack/plugins/start/emmet-vim"]
+	path = .vim/pack/plugins/start/emmet-vim
+	url = https://github.com/mattn/emmet-vim
+[submodule ".vim/pack/plugins/start/ctrlp.vim"]
+	path = .vim/pack/plugins/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim

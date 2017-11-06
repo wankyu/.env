@@ -34,33 +34,8 @@ if has("win32") && has("gui_running") " gvim
     endfunction
 endif
 
-" ------------------------------------
 "set nocompatible
-filetype off
-
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" My bundles here:
-" extended % matching for HTML, LaTeX, and many other languages
-Bundle 'matchit.zip'
-" Functions and mappings to close open HTML/XML tags (with C-_)
-Bundle 'closetag.vim'
-" plug-in which provides support for expanding abbreviations similar to emmet
-Bundle 'https://github.com/vim-scripts/Emmet.vim.git'
-Bundle 'https://github.com/vim-scripts/Colour-Sampler-Pack.git'
-
-Bundle 'https://github.com/digitaltoad/vim-jade'
-Bundle 'https://github.com/cakebaker/scss-syntax.vim'
-
-Bundle 'tpope/vim-fugitive'
-
 filetype plugin indent on
-
-" ------------------------------------
 
 if has("win32") && has("gui_running")
     set enc=korea
@@ -169,6 +144,7 @@ set lz          " |lazyredraw| Don't redraw while executing macros
 set nospell spelllang=en " Spell Checking 기능 (영어)
 "set report=0   " |report| Threshold for reporting number of lines changed.
 "set km=startsel,stopsel
+set breakindent
 
 set cursorline
 hi CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
@@ -198,7 +174,7 @@ imap <C-v> <C-r>"
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
-" 각종 toggle 기능
+" Toggle Setting
 fu! TogglePaste()
     let &paste = 1 - &paste
 endf
@@ -210,7 +186,7 @@ fu! ToggleTab()
     let &tw = &tw == 0 ? 80 : 0
 endf
 
-" 상용구 설정
+" Macro Setting
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 iab xtime <C-R>=strftime("%H:%M:%S")<CR>
 iab #d <div class=""></div>
@@ -276,13 +252,6 @@ endif
 if has("gui_running") || has("xterm_clipboard")
 	set cb=unnamed
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" filetype 기능 & Syntax Highlighting 기능
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 파일의 종류를 자동으로 인식
-filet plugin indent on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 편리한 기능
