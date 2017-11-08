@@ -71,7 +71,9 @@ endif
 
 syntax on       " Turns syntax highlighting on
 set t_Co=256    " Number of colors
-colo desert256  " |colorscheme| Load color scheme
+"color desert256  " |colorscheme| Load color scheme
+let g:seoul256_background = 233
+color seoul256
 set gfn=Bitstream\ Vera\ Sans\ Mono:h9:cHANGEUL " |guifont|
 
 " Check :help option-list
@@ -201,6 +203,24 @@ let g:netrw_browse_split = 0 " re-using the same window
 "let g:explWinSize=20
 
 let html_use_css = 1            " the ':%TOhtml' command generates html without <font> tags
+
+let g:lightline = {
+    \ 'colorscheme': 'seoul256',
+    \ 'active': {
+    \   'left': [
+    \     [ 'mode', 'paste' ],
+    \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+    \   ],
+    \   'right': [
+    \     [ 'lineinfo' ],
+    \     [ 'percent' ],
+    \     [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ]
+    \   ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ }
+\ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

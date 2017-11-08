@@ -28,3 +28,21 @@
 [submodule ".vim/pack/plugins/start/ctrlp.vim"]
 	path = .vim/pack/plugins/start/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule ".vim/pack/plugins/start/lightline.vim"]
+	path = .vim/pack/plugins/start/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+[submodule ".vim/pack/plugins/start/seoul256.vim"]
+	path = .vim/pack/plugins/start/seoul256.vim
+	url = https://github.com/junegunn/seoul256.vim
+[submodule ".vim/pack/plugins/start/vim-gitgutter"]
+	path = .vim/pack/plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule ".vim/pack/plugins/start/vim-peekaboo"]
+	path = .vim/pack/plugins/start/vim-peekaboo
+	url = https://github.com/junegunn/vim-peekaboo
+[submodule ".vim/pack/plugins/start/rainbow_parentheses.vim"]
+	path = .vim/pack/plugins/start/rainbow_parentheses.vim
+	url = https://github.com/junegunn/rainbow_parentheses.vim
+[submodule ".vim/pack/plugins/start/goyo.vim"]
+	path = .vim/pack/plugins/start/goyo.vim
+	url = https://github.com/junegunn/goyo.vim
