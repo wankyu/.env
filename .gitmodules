@@ -46,3 +46,6 @@
 [submodule ".vim/pack/plugins/start/goyo.vim"]
 	path = .vim/pack/plugins/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim
+[submodule ".vim/pack/plugins/start/matchit.zip"]
+	path = .vim/pack/plugins/start/matchit.zip
+	url = https://github.com/vim-scripts/matchit.zip
