@@ -158,6 +158,7 @@ autocmd BufRead,BufNewFile ~/www/work/m-search/* setlocal noet
 autocmd BufRead,BufNewFile ~/www/work/tvcast/* setlocal noet
 "au BufRead,BufNewFile *.dic setl ft=php
 au FileType javascript,jsp setl cin
+au BufReadPost *.njk set syntax=html
 "au BufReadPost *.scss set syntax=css
 
 map \n :set nu!<CR>
@@ -169,6 +170,8 @@ map \t :call ToggleTab()<CR>
 
 map <MiddleMouse> <Nop>
 map! <MiddleMouse> <Nop>
+map <ScrollWheelUp> <Nop>
+map <ScrollWheelDown> <Nop>
 
 imap <C-v> <C-r>"
 
