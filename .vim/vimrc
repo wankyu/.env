@@ -225,6 +225,12 @@ let g:lightline = {
     \ }
 \ }
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|babel_cache)$',
+    \ 'file': '\v\.(exe|so|dll|png|gif|jpg)$',
+    \ }
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 홈 디렉토리가 존재할 때에만 사용할 수 있는 기능들
