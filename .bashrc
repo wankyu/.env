@@ -7,4 +7,6 @@ source ${LOCAL_ENV}/sh/git-completion.bash
 
 alias mv='mv -i'
 alias cp='cp -i'
+alias git='LC_ALL=en_US.UTF-8 git'
+alias qgit='git'
 
