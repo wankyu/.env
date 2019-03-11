@@ -154,8 +154,6 @@ set cursorcolumn
 hi CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE
 hi Search cterm=NONE ctermfg=NONE ctermbg=240
 
-autocmd BufRead,BufNewFile ~/www/work/m-search/* setlocal noet
-autocmd BufRead,BufNewFile ~/www/work/tvcast/* setlocal noet
 "au BufRead,BufNewFile *.dic setl ft=php
 au FileType javascript,jsp setl cin
 au BufReadPost *.njk set syntax=html
@@ -315,3 +313,8 @@ function! QFDo(command)
         update
     endfor
 endfunction
+
+if filereadable($MYVIMRC . ".local")
+    source `=$MYVIMRC . ".local"`
+endif
+
