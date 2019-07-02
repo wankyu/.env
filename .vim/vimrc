@@ -159,6 +159,16 @@ au FileType javascript,jsp setl cin
 au BufReadPost *.njk set syntax=html
 "au BufReadPost *.scss set syntax=css
 
+au FileType javascript setlocal include=import
+au FileType javascript setlocal suffixesadd=.js
+au FileType javascript setlocal includeexpr=substitute(v:fname,'$','/index.js','')
+
+augroup every
+  " autocmd!
+  au InsertEnter * set norelativenumber
+  au InsertLeave * set relativenumber
+augroup END
+
 map \n :set nu!<CR>
 map \w :set wrap!<cr>
 map \l :set list!<cr>
@@ -172,6 +182,7 @@ map <ScrollWheelUp> <Nop>
 map <ScrollWheelDown> <Nop>
 
 imap <C-v> <C-r>"
+inoremap jk <Esc>
 
 " Using <Tab> to indent/unindent while in visual mode
 vmap <Tab> >gv
@@ -228,6 +239,22 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|babel_cache)$',
     \ 'file': '\v\.(exe|so|dll|png|gif|jpg)$',
     \ }
+
+let g:vimwiki_list = [
+    \{
+    \   'path': '~/Documents/vimwiki',
+    \   'syntax': 'markdown',
+    \   'ext' : '.md',
+    \   'diary_rel_path': '.',
+    \},
+\]
+let g:vimwiki_dir_link = 'index'
+
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends': 'jsx',
+\  },
+\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

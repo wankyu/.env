@@ -49,3 +49,9 @@
 [submodule ".vim/pack/plugins/start/matchit.zip"]
 	path = .vim/pack/plugins/start/matchit.zip
 	url = https://github.com/vim-scripts/matchit.zip
+[submodule ".vim/pack/plugins/start/markdown-preview.vim"]
+	path = .vim/pack/plugins/start/markdown-preview.vim
+	url = https://github.com/iamcco/markdown-preview.vim
+[submodule ".vim/pack/plugins/start/vimwiki.git"]
+	path = .vim/pack/plugins/start/vimwiki.git
+	url = https://github.com/vimwiki/vimwiki.git
