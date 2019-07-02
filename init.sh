@@ -22,7 +22,8 @@ do
         echo Warning: "~/$env" already exist.
     else
         # echo $envroot/$env ~/$env
-        ln -s $envroot/$env ~/$env
+        envroot=${envroot/#\~/$HOME}
+        ln -s $envroot/$env $HOME/$env
     fi
 done
 
