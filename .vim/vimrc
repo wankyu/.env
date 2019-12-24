@@ -34,7 +34,7 @@ if has("win32") && has("gui_running") " gvim
     endfunction
 endif
 
-"set nocompatible
+set nocompatible
 filetype plugin indent on
 
 if has("win32") && has("gui_running")
@@ -161,7 +161,8 @@ au BufReadPost *.njk set syntax=html
 
 au FileType javascript setlocal include=import
 au FileType javascript setlocal suffixesadd=.js
-au FileType javascript setlocal includeexpr=substitute(v:fname,'$','/index.js','')
+au FileType javascript setlocal includeexpr=substitute(v:fname,'^/\\(.*\\)$','\\1/index.js','')
+"au FileType javascript setlocal includeexpr=substitute(v:fname,'$','/index.js','')
 
 augroup every
   " autocmd!
@@ -181,8 +182,19 @@ map! <MiddleMouse> <Nop>
 map <ScrollWheelUp> <Nop>
 map <ScrollWheelDown> <Nop>
 
-imap <C-v> <C-r>"
+inoremap <C-v> <C-r>"
+" inoremap <Tab> <C-P>
 inoremap jk <Esc>
+
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
 
 " Using <Tab> to indent/unindent while in visual mode
 vmap <Tab> >gv
@@ -205,6 +217,15 @@ iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 iab xtime <C-R>=strftime("%H:%M:%S")<CR>
 iab #d <div class=""></div>
 iab #i <img src="../img/" width="" height="" title="" alt="">
+
+runtime macros/matchit.vim
+if exists("loaded_matchit")
+    let b:match_ignorecase = 1
+    let b:match_words = '<:>,' .
+    \ '<\@<=[ou]l\>[^>]*\%(>\|$\):<\@<=li\>:<\@<=/[ou]l>,' .
+    \ '<\@<=dl\>[^>]*\%(>\|$\):<\@<=d[td]\>:<\@<=/dl>,' .
+    \ '<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
+endif
 
 " Explorer Setting
 let g:netrw_preview = 1 " preview window shown in a vertically split window
