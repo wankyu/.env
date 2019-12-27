@@ -171,7 +171,7 @@ augroup every
 augroup END
 
 map \n :set nu!<CR>
-map \w :set wrap!<cr>
+map <leader>w :set wrap!<cr>
 map \l :set list!<cr>
 map \p :call TogglePaste()<CR>
 map \s :call ToggleSpell()<CR>
@@ -365,4 +365,4 @@ endfunction
 if filereadable($MYVIMRC . ".local")
     source `=$MYVIMRC . ".local"`
 endif
-
+runtime! vimrc.d/*.vim
