@@ -270,6 +270,7 @@ let g:vimwiki_list = [
     \},
 \]
 let g:vimwiki_dir_link = 'index'
+noremap glt :VimwikiToggleListItem<CR>
 
 let g:user_emmet_settings = {
 \  'javascript' : {
