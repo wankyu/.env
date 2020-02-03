@@ -1,39 +1,6 @@
 scripte utf-8   " |scriptencoding| Specify the character encoding used in the script
 set all&        " Reset option to its default value
 
-if has("win32") && has("gui_running") " gvim
-    if exists("$VIMRUNTIME")
-        source $VIMRUNTIME/vimrc_example.vim
-        source $VIMRUNTIME/mswin.vim
-    endif
-    behave mswin
-
-    set diffexpr=MyDiff()
-    function MyDiff()
-      let opt = '-a --binary '
-      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-      let arg1 = v:fname_in
-      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-      let arg2 = v:fname_new
-      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-      let arg3 = v:fname_out
-      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-      let eq = ''
-      if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-          let cmd = '""' . $VIMRUNTIME . '\diff"'
-          let eq = '"'
-        else
-          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-        endif
-      else
-        let cmd = $VIMRUNTIME . '\diff'
-      endif
-      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-    endfunction
-endif
-
 set nocompatible
 filetype plugin indent on
 
@@ -49,32 +16,12 @@ set fencs=utf-8,cp949,cp932,euc-jp,shift-jis,big5,ucs-2le,latin1
                 " |fileencodings| Automatically detected character encodings
                 " When Vim reads a file and 'fileencodings' starts with "ucs-bom", a check for the presence of the BOM is done and 'bomb' set accordingly.
 
-if has("gui_running")
-                " |guioptions| GUI: Which components and options are used
-    set go-=m   " Menu bar is present.
-    set go-=T   " Include Toolbar.
-    set go-=l   " Left-hand scrollbar is always present.
-    set go-=L   " Left-hand scrollbar is present when there is a vertically split window.
-    set go-=r   " Right-hand scrollbar is always present.
-    set go-=R   " Right-hand scrollbar is present when there is a vertically split window.
-    set go-=b   " Bottom (horizontal) scrollbar is present.
-    set go+=c   " Use console dialogs instead of popup dialogs for simple choices.
-
-    set mouse="" " Enable the use of the mouse.
-    set mousem=popup " Sets the model to use for the mouse.
-
-    " Set window size
-    if has("win32")
-        au GUIEnter * simalt ~x
-    endif
-endif
 
 syntax on       " Turns syntax highlighting on
 set t_Co=256    " Number of colors
 "color desert256  " |colorscheme| Load color scheme
 let g:seoul256_background = 233
 color seoul256
-set gfn=Bitstream\ Vera\ Sans\ Mono:h9:cHANGEUL " |guifont|
 
 " Check :help option-list
 set nocp        " |compatible| Vim behave in a more useful way
@@ -318,50 +265,6 @@ if exists("$HOME")
         set nobk
     endif
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 편집 기능 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
-" xterm_clipboard 기능이 있을 때에도 매핑 가능
-if has("gui_running") || has("xterm_clipboard")
-	set cb=unnamed
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 편리한 기능
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" http://stackoverflow.com/questions/4792561/how-to-do-search-replace-with-ack-
-" Define a command to make it easier to use
-command! -nargs=+ QFDo call QFDo(<q-args>)
-
-" Function that does the work
-function! QFDo(command)
-    " Create a dictionary so that we can
-    " get the list of buffers rather than the
-    " list of lines in buffers (easy way
-    " to get unique entries)
-    let buffer_numbers = {}
-    " For each entry, use the buffer number as 
-    " a dictionary key (won't get repeats)
-    for fixlist_entry in getqflist()
-        let buffer_numbers[fixlist_entry['bufnr']] = 1
-    endfor
-    " Make it into a list as it seems cleaner
-    let buffer_number_list = keys(buffer_numbers)
-
-    " For each buffer
-    for num in buffer_number_list
-        " Select the buffer
-        exe 'buffer' num
-        " Run the command that's passed as an argument
-        exe a:command
-        " Save if necessary
-        update
-    endfor
-endfunction
 
 if filereadable($MYVIMRC . ".local")
     source `=$MYVIMRC . ".local"`
