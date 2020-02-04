@@ -1,36 +1,33 @@
 scripte utf-8   " |scriptencoding| Specify the character encoding used in the script
-set all&        " Reset option to its default value
 
-set nocompatible
+set all&        " Reset option to its default value
+set nocp " |compatible| Vim behave in a more useful way
 filetype plugin indent on
 
-if has("win32") && has("gui_running")
-    set enc=korea
-else
-    set enc=utf-8
-endif
-                " |encoding| Encoding used internally
+set enc=utf-8   " |encoding| Encoding used internally
 let &tenc=&enc  " |termencoding| Encoding used for the terminal
 let &fenc=&enc  " |fileencoding| File encoding for multi-byte text
 set fencs=utf-8,cp949,cp932,euc-jp,shift-jis,big5,ucs-2le,latin1
-                " |fileencodings| Automatically detected character encodings
-                " When Vim reads a file and 'fileencodings' starts with "ucs-bom", a check for the presence of the BOM is done and 'bomb' set accordingly.
-
+  " |fileencodings| Automatically detected character encodings
+  " When Vim reads a file and 'fileencodings' starts with "ucs-bom", a check for the presence of the BOM is done and 'bomb' set accordingly.
 
 syntax on       " Turns syntax highlighting on
 set t_Co=256    " Number of colors
-"color desert256  " |colorscheme| Load color scheme
+"colo desert256  " |colorscheme| Load color scheme
 let g:seoul256_background = 233
-color seoul256
+colo seoul256
+hi Search cterm=NONE ctermfg=NONE ctermbg=240
+hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235
+hi CursorColumn cterm=NONE ctermfg=NONE ctermbg=235
 
-" Check :help option-list
-set nocp        " |compatible| Vim behave in a more useful way
+" Check :help |option-list|
 set lpl         " |loadplugins| Load plugin scripts when starting up
 set ff=mac      " |fileformat| File format used for file I/O
 set ffs=unix,dos,mac
                 " |fileformats| Automatically detected values for 'fileformat'
 set nobk        " |backup| Keep backup file after overwriting a file
 "set bex=.bkup  " |backupext| Extension used for the backup file
+set noswf       " |swapfile| Use a swapfile for the buffer
 set noeol       " |endofline| Write <EOL> for last line in file
 set hi=50       " |history| Number of command-lines that are remembered
 
@@ -44,8 +41,8 @@ set nu          " |number| Print the line number in front of each line
 set nuw=4       " |numberwidth| Number of columns used for the line number
 
 set et          " |expandtab| Use spaces when <Tab> is inserted
-set ts=4        " |tabstop| Number of spaces that <Tab> in file uses
-set sw=4        " |shiftwidth| Number of spaces to use for (auto)indent step
+set ts=2        " |tabstop| Number of spaces that <Tab> in file uses
+set sw=2        " |shiftwidth| Number of spaces to use for (auto)indent step
 "set sts=4       " |softtabstop| Number of spaces that <Tab> uses while editing
 set sta         " |smarttab| Use 'shiftwidth' when inserting <Tab>
 set ai          " |autoindent| Take indent for new line from previous line
@@ -63,7 +60,7 @@ set magic       " |magic| Special characters in search patterns
 set sm          " |showmatch| Briefly jump to matching bracket if insert one
 set ws          " |wrapscan| Searches wrap around the end of the file
 set is          " |incsearch| Highlight match while typing search pattern
-set hls         " |hlsearch| Highlight matches with last search pattern
+set nohls       " |hlsearch| Highlight matches with last search pattern
 set ic          " |ignorecase| Ignore case in search patterns
 set scs         " |smartcase| No ignore case when pattern has uppercase
 set inf         " |infercase| Adjust case of match for keyword completion
@@ -83,28 +80,28 @@ set lcs=tab:>-,trail:-,precedes:<,extends:>,nbsp:.
                 " |listchars| Characters for displaying in list mode
 set mps+=<:>    " |matchpairs| Pairs of characters that "%" can match
 
-set noto ttimeout " 키 입력 대기시간을 무제한으로, 그러나 key codes 에 대해서는 예외
-set tm=3000 ttm=100 " 키 입력 대기시간 설정 (milliseconds) (ttm 을 음수로 설정하면 tm 을 따라감)
+set noto ttimeout " |timeout| time out on key codes
+" set tm=3000 ttm=100 " |timeoutlen| The time in milliseconds that is waited for a key code or mapped key sequence to complete
 
-set wmnu        " |wildmenu| Use menu for command line completion
+set wmnu        " |wildmenu| command-line completion operates in an enhanced mode
+set wig+=*/tmp/*,*.so,*.swp,*.zip
+                " |wildignore| A file that matches with one of these patterns is ignored when expanding wildcards
 
 set lz          " |lazyredraw| Don't redraw while executing macros
 
-set nospell spelllang=en " Spell Checking 기능 (영어)
-"set report=0   " |report| Threshold for reporting number of lines changed.
-"set km=startsel,stopsel
-set breakindent
+set nospell     " |spell| When on spell checking will be done.
+set report=0    " |report| Threshold for reporting number of lines changed
+"set km=startsel,stopsel " |keymodel| enable special things that keys can do
+set bri         " |breakindent| Every wrapped line will continue visually indented
 
 set cursorline
-hi CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
 set cursorcolumn
-hi CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE
-hi Search cterm=NONE ctermfg=NONE ctermbg=240
 
-"au BufRead,BufNewFile *.dic setl ft=php
-au FileType javascript,jsp setl cin
+let g:html_use_css = 1    " the ':%TOhtml' command generates html without <font> tags
+
+" au BufRead,BufNewFile *.dic setlocal ft=php
+" au FileType javascript,jsp setlocal cin
 au BufReadPost *.njk set syntax=html
-"au BufReadPost *.scss set syntax=css
 
 au FileType javascript setlocal include=import
 au FileType javascript setlocal suffixesadd=.js
@@ -113,33 +110,34 @@ au FileType javascript setlocal includeexpr=substitute(v:fname,'^/\\(.*\\)$','\\
 
 augroup every
   " autocmd!
-  au InsertEnter * set norelativenumber
-  au InsertLeave * set relativenumber
+  au InsertEnter * set nornu
+  au InsertLeave * set rnu
+                " |relativenumber| Show the line number relative to the line with the cursor
 augroup END
 
-map \n :set nu!<CR>
+map <leader>n :set nu! rnu!<CR>
 map <leader>w :set wrap!<cr>
-map \l :set list!<cr>
-map \p :call TogglePaste()<CR>
-map \s :call ToggleSpell()<CR>
-map \t :call ToggleTab()<CR>
+map <leader>l :set list!<cr>
+map <leader>p :set paste!<CR>
+map <leader>s :set spell!<CR>
+map <leader>t :set et!<CR>
 
 map <MiddleMouse> <Nop>
 map! <MiddleMouse> <Nop>
 map <ScrollWheelUp> <Nop>
 map <ScrollWheelDown> <Nop>
 
-inoremap <C-v> <C-r>"
+" inoremap <C-v> <C-r>"
 " inoremap <Tab> <C-P>
 inoremap jk <Esc>
 
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 
@@ -147,32 +145,17 @@ inoremap <expr> <tab> InsertTabWrapper()
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
-" Toggle Setting
-fu! TogglePaste()
-    let &paste = 1 - &paste
-endf
-fu! ToggleSpell()
-    let &l:spell = 1 - &l:spell
-endf
-fu! ToggleTab()
-    set et!
-    let &tw = &tw == 0 ? 80 : 0
-endf
-
 " Macro Setting
-iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-iab xtime <C-R>=strftime("%H:%M:%S")<CR>
-iab #d <div class=""></div>
-iab #i <img src="../img/" width="" height="" title="" alt="">
+ia xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+ia xtime <C-R>=strftime("%H:%M:%S")<CR>
 
-runtime macros/matchit.vim
-if exists("loaded_matchit")
-    let b:match_ignorecase = 1
-    let b:match_words = '<:>,' .
-    \ '<\@<=[ou]l\>[^>]*\%(>\|$\):<\@<=li\>:<\@<=/[ou]l>,' .
-    \ '<\@<=dl\>[^>]*\%(>\|$\):<\@<=d[td]\>:<\@<=/dl>,' .
-    \ '<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
-endif
+" runtime macros/matchit.vim
+packadd! matchit
+au FileType javascript let b:match_ignorecase = 1
+au FileType javascript let b:match_words = '<:>,' .
+  \ '<\@<=[ou]l\>[^>]*\%(>\|$\):<\@<=li\>:<\@<=/[ou]l>,' .
+  \ '<\@<=dl\>[^>]*\%(>\|$\):<\@<=d[td]\>:<\@<=/dl>,' .
+  \ '<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
 
 " Explorer Setting
 let g:netrw_preview = 1 " preview window shown in a vertically split window
@@ -182,39 +165,36 @@ let g:netrw_browse_split = 0 " re-using the same window
 "let g:explStartRight=1
 "let g:explWinSize=20
 
-let html_use_css = 1            " the ':%TOhtml' command generates html without <font> tags
-
 let g:lightline = {
-    \ 'colorscheme': 'seoul256',
-    \ 'active': {
-    \   'left': [
-    \     [ 'mode', 'paste' ],
-    \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-    \   ],
-    \   'right': [
-    \     [ 'lineinfo' ],
-    \     [ 'percent' ],
-    \     [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ]
-    \   ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'fugitive#head'
-    \ }
+  \ 'colorscheme': 'seoul256',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+  \   ],
+  \   'right': [
+  \     [ 'lineinfo' ],
+  \     [ 'percent' ],
+  \     [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ]
+  \   ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ }
 \ }
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|babel_cache)$',
-    \ 'file': '\v\.(exe|so|dll|png|gif|jpg)$',
-    \ }
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|babel_cache)$',
+  \ 'file': '\v\.(exe|so|dll|png|gif|jpg)$',
+  \ }
 
 let g:vimwiki_list = [
-    \{
-    \   'path': '~/Documents/vimwiki',
-    \   'syntax': 'markdown',
-    \   'ext' : '.md',
-    \   'diary_rel_path': '.',
-    \},
+  \{
+  \   'path': '~/Documents/vimwiki',
+  \   'syntax': 'markdown',
+  \   'ext' : '.md',
+  \   'diary_rel_path': '.',
+  \},
 \]
 let g:vimwiki_dir_link = 'index'
 noremap glt :VimwikiToggleListItem<CR>
@@ -225,48 +205,8 @@ let g:user_emmet_settings = {
 \  },
 \}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 홈 디렉토리가 존재할 때에만 사용할 수 있는 기능들
-if exists("$HOME")
-    " 홈 디렉토리를 구한다.
-    " 특정 시스템에서는 홈 디렉토리 경로 끝에 / 또는 \ 문자가
-    " 붙어 있기 때문에, 그것들을 제거한다.
-	let s:home_dir = $HOME
-	let s:temp = strpart(s:home_dir,strlen(s:home_dir)-1,1)
-	if s:temp == "/" || s:temp == "\\"
-		let s:home_dir = strpart(s:home_dir,0,strlen(s:home_dir)-1)
-	endif
-
-    " 경로 설정
-    if has("win32")
-        let s:dir_tmp = s:home_dir."/_vim/tmp"
-        let s:dir_backup = s:home_dir."/_vim/backup"
-    else
-        let s:dir_tmp = s:home_dir."/.vim/tmp"
-        let s:dir_backup = s:home_dir."/.vim/backup"
-    endif
-
-    " 임시 디렉토리 설정
-    if isdirectory(s:dir_tmp)
-        set swf
-        let &dir = s:dir_tmp
-    else
-        set noswf
-        set dir=.
-    endif
-
-    " 백업 디렉토리 설정
-    if isdirectory(s:dir_backup)
-        set bk
-        let &bdir = s:dir_backup
-        set bex=.bak
-    else
-        set nobk
-    endif
-endif
-
 if filereadable($MYVIMRC . ".local")
-    source `=$MYVIMRC . ".local"`
+  source `=$MYVIMRC . ".local"`
 endif
 runtime! vimrc.d/*.vim
+
