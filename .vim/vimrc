@@ -151,8 +151,8 @@ ia xtime <C-R>=strftime("%H:%M:%S")<CR>
 
 " runtime macros/matchit.vim
 packadd! matchit
-au FileType javascript let b:match_ignorecase = 1
-au FileType javascript let b:match_words = '<:>,' .
+au FileType javascript,javascriptreact,typescriptreact let b:match_ignorecase = 1
+au FileType javascript,javascriptreact,typescriptreact let b:match_words = '<:>,' .
   \ '<\@<=[ou]l\>[^>]*\%(>\|$\):<\@<=li\>:<\@<=/[ou]l>,' .
   \ '<\@<=dl\>[^>]*\%(>\|$\):<\@<=d[td]\>:<\@<=/dl>,' .
   \ '<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
