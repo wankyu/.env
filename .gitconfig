@@ -1,0 +1,16 @@
+[merge]
+	defaultToUpstream = true
+[alias]
+	ll = log --all --graph --date-order --format=format:"%C(yellow)%h' '%Cblue%>(12)%ad' '%Cgreen%<(7)%aN%Cred%d' '%Creset%s" -40
+	st = status -s
+	append = commit --amend --no-edit
+  done = log --author=wankyu --since=`date "+%Y-%m-01T00:00:00"` --until=`date -d "+1 months" "+%Y-%m-01T00:00:00"` --date=short --reverse --format="%ad %h %s"
+[push]
+	default = upstream
+[core]
+	excludesfile = ~/.gitignore
+[credential]
+	helper = cache --timeout 18000
+[log]
+	date = relative
+
