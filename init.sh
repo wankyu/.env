@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-envroot='~/envsetting'
+envroot='~/.env'
 envs=(
     .vim
     .tmux.conf
+    .gitconfig
 )
 
 grep -q LOCAL_ENV ~/.bashrc
