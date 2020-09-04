@@ -49,6 +49,3 @@
 [submodule ".vim/pack/plugins/start/vimwiki.git"]
 	path = .vim/pack/plugins/start/vimwiki.git
 	url = https://github.com/vimwiki/vimwiki.git
-[submodule ".vim/pack/coc/start/coc"]
-	path = .vim/pack/coc/start/coc
-	url = https://github.com/neoclide/coc.nvim
