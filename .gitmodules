@@ -43,9 +43,6 @@
 [submodule ".vim/pack/plugins/start/vimwiki.git"]
 	path = .vim/pack/plugins/start/vimwiki.git
 	url = https://github.com/vimwiki/vimwiki.git
-[submodule ".vim/pack/plugins/start/vim-mundo"]
-	path = .vim/pack/plugins/start/vim-mundo
-	url = https://github.com/simnalamburt/vim-mundo
 [submodule ".vim/pack/themes/opt/moonlight.vim"]
 	path = .vim/pack/themes/opt/moonlight.vim
 	url = https://github.com/lewis6991/moonlight.vim.git
