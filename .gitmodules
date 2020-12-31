@@ -13,9 +13,6 @@
 [submodule ".vim/pack/plugins/start/vim-ragtag"]
 	path = .vim/pack/plugins/start/vim-ragtag
 	url = https://github.com/tpope/vim-ragtag
-[submodule ".vim/pack/plugins/start/auto-pairs"]
-	path = .vim/pack/plugins/start/auto-pairs
-	url = https://github.com/jiangmiao/auto-pairs
 [submodule ".vim/pack/plugins/start/vim-repeat"]
 	path = .vim/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat
@@ -28,9 +25,6 @@
 [submodule ".vim/pack/plugins/start/lightline.vim"]
 	path = .vim/pack/plugins/start/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
-[submodule ".vim/pack/plugins/start/seoul256.vim"]
-	path = .vim/pack/plugins/start/seoul256.vim
-	url = https://github.com/junegunn/seoul256.vim
 [submodule ".vim/pack/plugins/start/vim-gitgutter"]
 	path = .vim/pack/plugins/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
@@ -49,3 +43,27 @@
 [submodule ".vim/pack/plugins/start/vimwiki.git"]
 	path = .vim/pack/plugins/start/vimwiki.git
 	url = https://github.com/vimwiki/vimwiki.git
+[submodule ".vim/pack/plugins/start/vim-mundo"]
+	path = .vim/pack/plugins/start/vim-mundo
+	url = https://github.com/simnalamburt/vim-mundo
+[submodule ".vim/pack/themes/opt/moonlight.vim"]
+	path = .vim/pack/themes/opt/moonlight.vim
+	url = https://github.com/lewis6991/moonlight.vim.git
+[submodule ".vim/pack/themes/opt/vim-colors-pencil"]
+	path = .vim/pack/themes/opt/vim-colors-pencil
+	url = https://github.com/reedes/vim-colors-pencil.git
+[submodule ".vim/pack/themes/opt/vim-afterglow"]
+	path = .vim/pack/themes/opt/vim-afterglow
+	url = https://github.com/danilo-augusto/vim-afterglow.git
+[submodule ".vim/pack/themes/opt/foo"]
+	path = .vim/pack/themes/opt/foo
+	url = https://github.com/victorze/foo
+[submodule ".vim/pack/themes/opt/gruvbox-material"]
+	path = .vim/pack/themes/opt/gruvbox-material
+	url = https://github.com/sainnhe/gruvbox-material.git
+[submodule ".vim/pack/themes/opt/seoul256.vim"]
+	path = .vim/pack/themes/opt/seoul256.vim
+	url = https://github.com/junegunn/seoul256.vim
+[submodule ".vim/pack/plugins/start/vim-startify"]
+	path = .vim/pack/plugins/start/vim-startify
+	url = https://github.com/mhinz/vim-startify.git

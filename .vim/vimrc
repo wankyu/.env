@@ -13,9 +13,10 @@ set fencs=utf-8,cp949,cp932,euc-jp,shift-jis,big5,ucs-2le,latin1
 
 syntax on       " Turns syntax highlighting on
 set t_Co=256    " Number of colors
-"colo desert256  " |colorscheme| Load color scheme
-let g:seoul256_background = 233
-colo seoul256
+" colo desert256  " |colorscheme| Load color scheme
+" let g:seoul256_background = 233
+" colo seoul256
+colo afterglow
 hi Search cterm=NONE ctermfg=NONE ctermbg=240
 hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235
 hi CursorColumn cterm=NONE ctermfg=NONE ctermbg=235
@@ -188,25 +189,21 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|png|gif|jpg)$',
   \ }
 
-let g:vimwiki_list = [
-  \{
-  \   'path': '~/Documents/vimwiki',
-  \   'syntax': 'markdown',
-  \   'ext' : '.md',
-  \   'diary_rel_path': '.',
-  \},
-\]
-let g:vimwiki_dir_link = 'index'
-noremap glt :VimwikiToggleListItem<CR>
-
 let g:user_emmet_settings = {
 \  'javascript' : {
 \      'extends': 'jsx',
 \  },
 \}
 
+" https://stackoverflow.com/questions/749297/can-i-see-changes-before-i-save-my-file-in-vim
+function DiffBuffer()
+  w !diff % -
+endfunction
+
 if filereadable($MYVIMRC . ".local")
   source `=$MYVIMRC . ".local"`
 endif
 runtime! vimrc.d/*.vim
 
+" http://zzapper.co.uk/vimtips.html
+" https://github.com/amix/vimrc
