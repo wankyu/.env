@@ -13,4 +13,11 @@
 	helper = cache --timeout 18000
 [log]
 	date = relative
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
 
